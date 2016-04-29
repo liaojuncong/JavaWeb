@@ -3,6 +3,7 @@ package org.cong.chapter3.controller;
 import org.cong.chapter3.model.Customer;
 import org.cong.chapter3.service.CustomerService;
 import org.cong.framework.annotation.Action;
+import org.cong.framework.annotation.Aspect;
 import org.cong.framework.annotation.Controller;
 import org.cong.framework.annotation.Inject;
 import org.cong.framework.bean.Param;
