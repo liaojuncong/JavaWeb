@@ -1,9 +1,11 @@
 package org.cong.framework.helper;
 
 import org.cong.framework.annotation.Aspect;
+import org.cong.framework.annotation.Service;
 import org.cong.framework.proxy.AspectProxy;
 import org.cong.framework.proxy.Proxy;
 import org.cong.framework.proxy.ProxyManager;
+import org.cong.framework.proxy.TransactionProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +39,12 @@ public final class AopHelper {
 
     private static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception {
         Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
+        addAspectProxy(proxyMap);
+        addTransactionProxy(proxyMap);
+        return proxyMap;
+    }
+
+    private static void addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
         Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
         for (Class<?> proxyClass : proxyClassSet) {
             if (proxyClass.isAnnotationPresent(Aspect.class)) {
@@ -45,7 +53,11 @@ public final class AopHelper {
                 proxyMap.put(proxyClass, targetClassSet);
             }
         }
-        return proxyMap;
+    }
+
+    private static void addTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
+        Set<Class<?>> serviceClassSet = ClassHelper.getClassSetByAnnotation(Service.class);
+        proxyMap.put(TransactionProxy.class, serviceClassSet);
     }
 
     private static Set<Class<?>> createTargetClassSet(Aspect aspect) throws Exception {
