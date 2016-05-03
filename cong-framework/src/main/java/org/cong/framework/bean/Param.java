@@ -1,6 +1,7 @@
 package org.cong.framework.bean;
 
 import org.cong.framework.util.CastUtil;
+import org.cong.framework.util.CollectionUtil;
 
 import java.util.Map;
 
@@ -30,5 +31,12 @@ public class Param {
      */
     public Map<String, Object> getMap() {
         return paramMap;
+    }
+
+    /**
+     * 验证参数是否为空
+     */
+    public boolean isEmpty() {
+        return CollectionUtil.isEmpty(paramMap);
     }
 }
