@@ -3,6 +3,7 @@ package org.cong.controller;
 import com.alibaba.fastjson.JSON;
 import org.cong.pojo.Customer;
 import org.cong.service.ICustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class HomeController {
 
-    @Resource
+    @Autowired
     private ICustomerService customerService;
 
     @RequestMapping(value="/home", method = RequestMethod.GET)
